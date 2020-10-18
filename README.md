@@ -5,7 +5,7 @@
 
 ## 1.如何复现B榜结果  
 
-&nbsp;1）运行环境及配置   
+### &nbsp;&nbsp; 1）运行环境及配置   
 &nbsp;&nbsp;  本次竞赛使用的服务器配置  
 &nbsp;&nbsp;&nbsp;  - 4卡1080Ti  
 &nbsp;&nbsp;&nbsp;  - 2卡Titan  
@@ -15,7 +15,7 @@
 &nbsp;&nbsp; 将本项目copy至服务器，在fast-reid-master文件夹内将logs压缩文件解压  
 &nbsp;&nbsp; https://pan.baidu.com/s/1JkyFZZ0TrI1rMRU_PAOyEg 提取码：4bmh   
 
-&nbsp;2）数据集存放   
+### &nbsp;&nbsp;2）数据集存放   
 &nbsp;&nbsp; 在fast-reid-master内新建datasets文件夹,其中文件结构如下：    
 naic2019  
 &nbsp;&nbsp;&nbsp;&nbsp; --round1  
@@ -33,7 +33,7 @@ naic2020_round1
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--label.txt  
         
         
-&nbsp;3）复现过程  
+### &nbsp;&nbsp;3）复现过程  
   &nbsp;&nbsp;该结果由5个模型集成而成，其中模型均在logs/NAIC_All/A中，集成的5个模型其文件夹名分别是：0_269x，0_269x_augmix，0_269x_rcs_augmix，1_101x_rcs， 2_200x_rcs  
   复现过程为：首先对于5个模型，各自计算dist.npy文件，最后运行fastreid下的ensemble_dist.py进行集成，获得最终的R1_B.json提交文件  
 
@@ -54,7 +54,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/train_net.py --config-file ./configs/P
 
 ## 2.如何训练和测试  
 
-&nbsp;1）A榜如何训练和测试 
+### &nbsp;&nbsp;1）A榜如何训练和测试 
 
 A榜训练：首先更改数据集位置， fastreid/data/bulid.py 中根据提示改为 ./datasets/  
 其次 configs/PCL中的yml DATASETS项 根据提示改为NAIC_All并适当更改OUTPUT_DIR保存输出日志  
@@ -72,7 +72,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/train_net.py --config-file ./configs/P
 
 其中 MODEL.WEIGHTS 以及--config-file位置可适当自行更改
 
-&nbsp;2）B榜如何测试  
+### &nbsp;&nbsp;2）B榜如何测试  
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先更改数据集位置， fastreid/data/bulid.py 中根据提示改为 "/home/zhangzhengjie/workspace/image_B" 可根据image_B存储的位置，自行适当修改  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次 configs/PCL中的yml DATASETS项 根据提示改为NAIC_test并适当更改OUTPUT_DIR保存输出日志  
@@ -82,9 +82,9 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/train_net.py --config-file ./configs/P
 其中MODEL.WEIGHTS 以及--config-file位置可适当自行更改
 
 ## 3.项目介绍  
-&nbsp;1）模型配置位置  
+### &nbsp;&nbsp;1）模型配置位置  
 &nbsp;&nbsp;&nbsp;&nbsp;  configs/PCL下的yml文件，具体模型配置参数可以在yml文件中查看  
-&nbsp;2）模型介绍  
+### &nbsp;&nbsp;2）模型介绍  
 网络结构：  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用 resnest 作为backbone 并且加入IBN层，在BN上由于多卡的原因使用了syncBN
 最后的FC分类层使用了 circleSoftmax层替换，同时Pooling 方式由传统的avg pooling改成了可学习的gempool的方式
@@ -103,7 +103,7 @@ Loss：
 
 同时初赛最终的方案为： 上述模型的101层版本(rcs)， 200层版本(rcs)， 269x版本， 以及269层版本（rcs），和269层版本(rcs,augmix)，总共五个模型的集成版本。 
 
-&nbsp;3）trick  
+### &nbsp;&nbsp;3）trick  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据增强
 使用了三通道0.5概率随机交换的数据增强trick  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;具体代码位置  fastreid/data/transforms/transforms.py中的RandomShuffleChannel类
