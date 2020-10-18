@@ -31,6 +31,8 @@ naic2020_round1
     &nbsp;&nbsp;&nbsp;&nbsp;--train  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--images  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--label.txt  
+        
+        
 &nbsp;3）复现过程  
   &nbsp;&nbsp;该结果由5个模型集成而成，其中模型均在logs/NAIC_All/A中，集成的5个模型其文件夹名分别是：0_269x，0_269x_augmix，0_269x_rcs_augmix，1_101x_rcs， 2_200x_rcs  
   复现过程为：首先对于5个模型，各自计算dist.npy文件，最后运行fastreid下的ensemble_dist.py进行集成，获得最终的R1_B.json提交文件  
