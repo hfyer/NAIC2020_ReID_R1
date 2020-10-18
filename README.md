@@ -1,9 +1,9 @@
 
 #  说明文档  
-重识别的行人会梦见摄像头吗 
+## 重识别的行人会梦见摄像头吗 
 
 
-1.如何复现B榜结果  
+## 1.如何复现B榜结果  
 
 &nbsp;1）运行环境及配置   
 &nbsp;&nbsp;  本次竞赛使用的服务器配置  
@@ -52,7 +52,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/train_net.py --config-file ./configs/P
 最后在fastreid 中运行 python ensemble_dist.py   
 需要适当更改 ensemble_dist.py 中的query_path，gallery_path与dist1_path等路径。  
 
-2.如何训练和测试  
+## 2.如何训练和测试  
 
 &nbsp;1）A榜如何训练和测试 
 
@@ -81,7 +81,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python tools/train_net.py --config-file ./configs/P
 
 其中MODEL.WEIGHTS 以及--config-file位置可适当自行更改
 
-3.项目介绍  
+## 3.项目介绍  
 &nbsp;1）模型配置位置  
 &nbsp;&nbsp;&nbsp;&nbsp;  configs/PCL下的yml文件，具体模型配置参数可以在yml文件中查看  
 &nbsp;2）模型介绍  
